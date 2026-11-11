@@ -7,7 +7,7 @@ import SectionHeading from './SectionHeading'
 
 const cardStyle = {
   borderRadius: 18,
-  '--spotlight-card-surface': '#0b1c18',
+  '--spotlight-card-surface': '#101211',
   '--spotlight-card-border': 'transparent',
   '--spotlight-card-shadow': '0 34px 64px -38px rgba(0, 0, 0, 0.85)',
 } as CSSProperties
@@ -41,20 +41,13 @@ export default function Capabilities() {
               proximity={110}
               grain={0.14}
               flare={false}
-              className="flex min-h-[330px] flex-col overflow-hidden border border-line-dark p-8 transition-transform duration-500 hover:-translate-y-1 [background-image:radial-gradient(circle_at_100%_0%,rgba(127,227,197,0.08),transparent_55%)]"
+              className="flex min-h-[330px] flex-col overflow-hidden border border-white/10 p-8 transition-transform duration-500 hover:-translate-y-1 [background-image:radial-gradient(circle_at_100%_0%,rgba(255,255,255,0.04),transparent_55%)]"
               style={cardStyle}
             >
               <span
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-x-7 top-0 z-0 h-px bg-gradient-to-r from-transparent via-mint/40 to-transparent"
               />
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute -right-3 -bottom-7 z-0 font-display text-[7rem] leading-none font-semibold tracking-[-0.06em] text-white/[0.06]"
-              >
-                {String(index + 1).padStart(2, '0')}
-              </span>
-
               <div className="relative z-10 flex flex-1 flex-col">
                 <div className="flex items-center gap-3">
                   <h3 className="font-display text-[1.35rem] leading-[1.2] font-medium tracking-[-0.02em] text-white">
