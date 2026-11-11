@@ -55,13 +55,10 @@ export default function Capabilities() {
                 </div>
                 <p className="mt-3 text-[0.95rem] font-normal text-white/60">{capability.copy}</p>
 
-                <div className="mt-auto flex items-center justify-between gap-3 border-t border-white/8 pt-5">
+                <div className="mt-auto flex items-center gap-3 border-t border-white/8 pt-5">
                   <span className="flex items-center gap-2 font-mono text-[0.7rem] tracking-[0.06em] text-white/50 uppercase">
                     <i className="h-1 w-1 rounded-full bg-mint" aria-hidden="true" />
                     {capability.tag}
-                  </span>
-                  <span className="text-[0.9rem] text-mint/60" aria-hidden="true">
-                    ↗
                   </span>
                 </div>
               </div>
