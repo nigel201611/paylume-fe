@@ -18,18 +18,12 @@ export default function Solutions() {
           {solutions.items.map((solution, index) => (
             <div
               key={solution.title}
-              className="relative isolate flex min-h-[360px] flex-col overflow-hidden rounded-[18px] border border-line bg-[#fffdf8] p-9 shadow-[0_2px_3px_rgba(15,29,24,0.03),0_30px_60px_-38px_rgba(16,36,44,0.3)] transition-transform duration-500 hover:-translate-y-1 [background-image:radial-gradient(circle_at_100%_0%,rgba(31,157,128,0.06),transparent_55%)]"
+              className="relative isolate flex min-h-[360px] flex-col overflow-hidden rounded-[18px] border border-line bg-[#fffdf8] p-9 shadow-[0_2px_3px_rgba(15,29,24,0.03),0_30px_60px_-38px_rgba(16,36,44,0.3)] transition-transform duration-500 hover:-translate-y-1"
             >
               <span
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-x-8 top-0 z-0 h-px bg-gradient-to-r from-transparent via-mint-deep/35 to-transparent"
               />
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute -right-2 -bottom-8 z-0 font-display text-[7rem] leading-none font-semibold tracking-[-0.06em] text-ink/[0.06]"
-              >
-                {String(index + 1).padStart(2, '0')}
-              </span>
 
               <div className="relative z-10 flex flex-1 flex-col">
                 <div className="flex items-start justify-between gap-4">
