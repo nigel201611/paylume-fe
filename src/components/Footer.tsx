@@ -5,7 +5,7 @@ export default function Footer() {
   const { t } = useI18n()
 
   return (
-    <footer className="on-dark border-t border-white/6 bg-[#040b09] px-6 py-10 text-center text-[0.78rem] text-white/40">
+    <footer className="on-dark border-t border-white/6 bg-[#0a0a0b] px-6 py-10 text-center text-[0.78rem] text-white/55">
       <div className="mb-6 flex justify-center">
         <Logo />
       </div>

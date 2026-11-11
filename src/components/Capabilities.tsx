@@ -24,7 +24,7 @@ export default function Capabilities() {
         </FadeContent>
 
         <FadeContent
-          className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5"
+          className="mt-14 grid gap-4 sm:grid-cols-2 xl:grid-cols-4 lg:gap-5"
           stagger={110}
           duration={1000}
           threshold={0.1}
@@ -41,13 +41,9 @@ export default function Capabilities() {
               proximity={110}
               grain={0.14}
               flare={false}
-              className="flex min-h-[330px] flex-col overflow-hidden border border-white/10 p-8 transition-transform duration-500 hover:-translate-y-1 [background-image:radial-gradient(circle_at_100%_0%,rgba(255,255,255,0.04),transparent_55%)]"
+              className="flex min-h-[330px] flex-col overflow-hidden border border-white/10 p-6 transition-transform duration-500 hover:-translate-y-1 [background-image:radial-gradient(circle_at_100%_0%,rgba(255,255,255,0.04),transparent_55%)] xl:p-8"
               style={cardStyle}
             >
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-x-7 top-0 z-0 h-px bg-gradient-to-r from-transparent via-mint/40 to-transparent"
-              />
               <div className="relative z-10 flex flex-1 flex-col">
                 <div className="flex items-center gap-3">
                   <h3 className="font-display text-[1.35rem] leading-[1.2] font-medium tracking-[-0.02em] text-white">

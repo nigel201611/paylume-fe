@@ -7,10 +7,11 @@ import Noise from './reactbits/Noise/Noise'
 import ShapeGrid from './reactbits/ShapeGrid/ShapeGrid'
 import SpotlightCard from './reactbits/SpotlightCard/SpotlightCard'
 import SplitText from './reactbits/SplitText/SplitText'
+import StarBorder from './reactbits/StarBorder/StarBorder'
 
 const panelStyle = {
   borderRadius: 20,
-  '--spotlight-card-surface': 'rgba(9, 26, 21, 0.96)',
+  '--spotlight-card-surface': 'rgba(16, 17, 19, 0.97)',
   '--spotlight-card-border': 'transparent',
   '--spotlight-card-shadow': '0 2px 4px rgba(0, 0, 0, 0.35), 0 48px 100px -32px rgba(0, 0, 0, 0.85)',
 } as CSSProperties
@@ -31,9 +32,9 @@ export default function Hero() {
           lineWidth={1}
           direction="diagonal"
           speed={0.12}
-          lineColor="rgba(127, 227, 197, 0.10)"
-          hoverColor="#7fe3c5"
-          hoverFillColor="rgba(127, 227, 197, 0.10)"
+          lineColor="rgba(255, 255, 255, 0.07)"
+          hoverColor="rgba(255, 255, 255, 0.55)"
+          hoverFillColor="rgba(255, 255, 255, 0.06)"
           fillOpacity={0.18}
           glow={0.5}
           trail={0.55}
@@ -46,7 +47,7 @@ export default function Hero() {
       </div>
       <div className="hero-orbit" aria-hidden="true" />
       <div
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_55%_at_18%_100%,rgba(31,157,128,0.16),transparent_70%),radial-gradient(ellipse_52%_46%_at_84%_6%,rgba(31,157,128,0.10),transparent_65%),radial-gradient(ellipse_130%_120%_at_50%_42%,transparent_38%,rgba(2,8,7,0.55))]"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_55%_at_18%_100%,rgba(255,255,255,0.06),transparent_70%),radial-gradient(ellipse_52%_46%_at_84%_6%,rgba(255,255,255,0.04),transparent_65%),radial-gradient(ellipse_130%_120%_at_50%_42%,transparent_38%,rgba(0,0,0,0.55))]"
         aria-hidden="true"
       />
       <Noise
@@ -78,7 +79,7 @@ export default function Hero() {
             </GradientText>
           </p>
 
-          <h1 className="hero-title font-display text-[clamp(3rem,7vw,6.5rem)] leading-[1.03] font-medium tracking-[-0.055em] text-white">
+          <h1 className="hero-title font-display text-[clamp(2.75rem,6.5vw,5.8rem)] leading-[1.03] font-medium tracking-[-0.055em] text-white">
             {hero.titleLines.map((line) => (
               <span key={line.text} className={`block ${line.accent ? 'hero-accent-line' : ''}`}>
                 <SplitText
@@ -107,10 +108,46 @@ export default function Hero() {
 
           <div className="mt-10 flex flex-wrap gap-4">
             <Magnet padding={45} magnetStrength={3} wrapperClassName="inline-flex">
-              <a href={hero.primaryCta.href} className="btn btn-primary">
-                {hero.primaryCta.label}
-                <span aria-hidden="true">→</span>
-              </a>
+              <StarBorder
+                as="a"
+                href={hero.primaryCta.href}
+                color="#69FFCE"
+                trailColor="#0A4A34"
+                backgroundColor="transparent"
+                textColor="#FFFFFF"
+                borderColor="rgba(105, 255, 206, 0.55)"
+                radius={999}
+                thickness={1.8}
+                duration={5}
+                glow={0.55}
+                sparkle
+                className="font-body font-semibold"
+                style={{
+                  padding: '0.95rem 1.7rem',
+                  fontSize: '0.95rem',
+                  fontWeight: 600,
+                  backgroundImage: 'linear-gradient(90deg, #36CDCA 0%, #00DD95 100%)',
+                }}
+              >
+                <span aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden rounded-full">
+                  <span className="absolute inset-y-[-40%] left-0 w-1/3 animate-[cta-shine_4.2s_ease-in-out_infinite] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+                </span>
+                <span className="relative z-10 inline-flex items-center gap-2">
+                  {hero.primaryCta.label}
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-4 w-4"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                </span>
+              </StarBorder>
             </Magnet>
             <Magnet padding={45} magnetStrength={3} wrapperClassName="inline-flex">
               <a href={hero.secondaryCta.href} className="btn btn-secondary">
@@ -122,17 +159,17 @@ export default function Hero() {
 
         <div className="relative w-full max-w-[640px] lg:justify-self-end">
           <div
-            className="pointer-events-none absolute inset-x-8 top-12 h-3/4 rounded-full bg-mint/[0.16] blur-3xl"
+            className="pointer-events-none absolute inset-x-8 top-12 h-3/4 rounded-full bg-white/[0.07] blur-3xl"
             aria-hidden="true"
           />
           <div className="relative lg:rotate-[1.5deg] lg:transition-transform lg:duration-500 lg:hover:rotate-0">
             <div className="hero-panel-float relative">
               <div
-                className="absolute inset-x-5 -bottom-2 h-full rounded-[22px] border border-white/6 bg-[#0a1b16]/70"
+                className="absolute inset-x-5 -bottom-2 h-full rounded-[22px] border border-white/6 bg-[#141416]/70"
                 aria-hidden="true"
               />
               <div
-                className="absolute inset-x-10 -bottom-4 h-full rounded-[22px] border border-white/5 bg-[#0a1b16]/45"
+                className="absolute inset-x-10 -bottom-4 h-full rounded-[22px] border border-white/5 bg-[#101012]/45"
                 aria-hidden="true"
               />
 
@@ -178,7 +215,7 @@ export default function Hero() {
                     {hero.panel.title}
                   </p>
 
-                  <div className="mt-5 rounded-2xl border border-mint/20 bg-[linear-gradient(135deg,rgba(127,227,197,0.12),rgba(255,255,255,0.04))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_22px_44px_-34px_rgba(0,0,0,0.9)] sm:p-5">
+                  <div className="mt-5 rounded-2xl border border-white/15 bg-[linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_22px_44px_-34px_rgba(0,0,0,0.9)] sm:p-5">
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <p className="font-mono text-[0.68rem] tracking-[0.06em] text-white/55 uppercase">
@@ -297,11 +334,11 @@ export default function Hero() {
                     ))}
                   </div>
 
-                  <p className="mt-5 font-mono text-[0.7rem] tracking-[0.04em] text-white/42">{hero.panel.note}</p>
+                  <p className="mt-5 font-mono text-[0.7rem] tracking-[0.04em] text-white/55">{hero.panel.note}</p>
                 </div>
               </SpotlightCard>
 
-              <div className="absolute -bottom-4 left-6 hidden items-center gap-2 rounded-full border border-mint/15 bg-[#0b1c18]/95 px-3.5 py-2 shadow-[0_16px_32px_-20px_rgba(0,0,0,0.8)] sm:flex">
+              <div className="absolute -bottom-4 left-6 hidden items-center gap-2 rounded-full border border-mint/15 bg-[#141416]/95 px-3.5 py-2 shadow-[0_16px_32px_-20px_rgba(0,0,0,0.8)] sm:flex">
                 <span
                   className="grid h-5 w-5 place-items-center rounded-full bg-mint text-[0.6rem] font-semibold text-navy"
                   aria-hidden="true"

@@ -34,11 +34,11 @@ export default function AboutSection() {
             {about.meta.map((item) => (
               <div
                 key={item.key}
-                className="group rounded-2xl border border-line/70 bg-[#fffdf9]/70 p-5 shadow-[0_16px_40px_-36px_rgba(16,36,44,0.4)] transition-colors duration-200 hover:bg-[#fffdf9]"
+                className="group rounded-2xl border border-line bg-[#fffdf9] p-5 shadow-[0_16px_40px_-36px_rgba(20,20,22,0.35)] transition-colors duration-200 hover:bg-[#fffdf9]"
               >
                 <span className="mb-1.5 flex items-center gap-2 font-mono text-[0.7rem] tracking-[0.08em] text-ink-mute uppercase">
                   <span
-                    className="h-1 w-1 rounded-full bg-mint-deep/40 transition-colors group-hover:bg-mint-deep"
+                    className="h-1 w-1 rounded-full bg-mint-ink/40 transition-colors group-hover:bg-mint-ink"
                     aria-hidden="true"
                   />
                   {item.key}

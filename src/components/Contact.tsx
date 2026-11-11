@@ -39,8 +39,8 @@ export default function Contact() {
           glow={0.6}
           sparkle={false}
           hover="brighten"
-          backgroundColor="#081a15"
-          borderColor="rgba(127, 227, 197, 0.14)"
+          backgroundColor="#131315"
+          borderColor="rgba(255, 255, 255, 0.12)"
           textColor="#ffffff"
           className="w-full p-0!"
         >

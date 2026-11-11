@@ -30,7 +30,7 @@ export default function App() {
         {t.common.skipToContent}
       </a>
       <Nav />
-      <main id="main">
+      <main id="main" tabIndex={-1}>
         <Hero />
         <TrustStrip />
         <AboutSection />

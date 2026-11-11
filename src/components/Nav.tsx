@@ -18,6 +18,7 @@ export default function Nav() {
   const navListRef = useRef<HTMLUListElement>(null)
   const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({})
   const scrollLockRef = useRef(0)
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -108,11 +109,26 @@ export default function Nav() {
     }
   }, [activeId, locale])
 
+  // Close the mobile menu when the viewport reaches the desktop breakpoint,
+  // otherwise its body scroll lock would persist with the panel hidden.
+  useEffect(() => {
+    const query = window.matchMedia('(min-width: 1024px)')
+    const onChange = () => {
+      if (query.matches) setOpen(false)
+    }
+
+    query.addEventListener('change', onChange)
+    return () => query.removeEventListener('change', onChange)
+  }, [])
+
   useEffect(() => {
     if (!open) return
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setOpen(false)
+      if (event.key === 'Escape') {
+        setOpen(false)
+        menuButtonRef.current?.focus()
+      }
     }
 
     const previousOverflow = document.body.style.overflow
@@ -145,7 +161,7 @@ export default function Nav() {
 
         <div className="flex items-center gap-3 md:gap-5 lg:gap-6">
           <nav className="hidden lg:block" aria-label={t.common.primaryNav}>
-            <ul ref={navListRef} className="relative flex items-center gap-7">
+            <ul ref={navListRef} className="relative flex items-center gap-6">
               {t.nav.map((link) => {
                 const id = link.href.slice(1)
                 const active = id === activeId
@@ -180,9 +196,18 @@ export default function Nav() {
             </ul>
           </nav>
 
+          <a
+            href="#contact"
+            onClick={() => selectSection('contact')}
+            className="hidden h-9 items-center rounded-full bg-[linear-gradient(90deg,#36cdca_0%,#00dd95_100%)] px-4 font-mono text-[0.7rem] font-medium tracking-[0.08em] text-white uppercase transition hover:brightness-105 xl:inline-flex"
+          >
+            {t.common.getInTouch}
+          </a>
+
           <LanguageSwitch />
 
           <button
+            ref={menuButtonRef}
             type="button"
             className="relative h-10 w-10 lg:hidden"
             aria-expanded={open}
@@ -211,7 +236,7 @@ export default function Nav() {
         >
           <nav className="shell py-5" aria-label={t.common.mobileNav}>
             <ul className="flex flex-col gap-1">
-              {t.nav.map((link, index) => {
+              {t.nav.map((link) => {
                 const id = link.href.slice(1)
                 const active = id === activeId
 
@@ -224,7 +249,7 @@ export default function Nav() {
                         selectSection(id)
                         setOpen(false)
                       }}
-                      className={`relative flex items-center justify-between rounded-xl px-3 py-4 transition-colors duration-300 ${
+                      className={`relative flex items-center rounded-xl px-3 py-4 transition-colors duration-300 ${
                         active ? 'text-mint' : 'text-white/85 hover:text-mint'
                       }`}
                     >
@@ -238,13 +263,6 @@ export default function Nav() {
                         />
                       )}
                       <span className="relative z-10 font-display text-lg">{link.label}</span>
-                      <span
-                        className={`relative z-10 font-mono text-[0.8rem] tracking-[0.08em] ${
-                          active ? 'text-mint/70' : 'text-white/30'
-                        }`}
-                      >
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
                     </a>
                   </li>
                 )
