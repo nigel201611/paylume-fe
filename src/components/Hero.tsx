@@ -219,12 +219,12 @@ export default function Hero() {
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <p className="font-mono text-[0.68rem] tracking-[0.06em] text-white/55 uppercase">
-                          {hero.panel.amountLabel}
+                          {hero.panel.scopeLabel}
                         </p>
                         <p className="mt-1.5 font-display text-[1.55rem] leading-none font-medium tracking-[-0.03em] text-white sm:text-[1.9rem]">
-                          {hero.panel.amountValue}
+                          {hero.panel.scopeValue}
                         </p>
-                        <p className="mt-2 text-[0.78rem] text-white/60">{hero.panel.amountNote}</p>
+                        <p className="mt-2 text-[0.78rem] text-white/60">{hero.panel.scopeNote}</p>
                       </div>
                       <span
                         className="hidden h-9 w-9 shrink-0 place-items-center rounded-full border border-mint/20 bg-mint/[0.08] text-[0.9rem] text-mint sm:grid"
@@ -248,9 +248,9 @@ export default function Hero() {
                       <div className="flex items-start justify-between gap-3">
                         <div>
                           <p className="font-mono text-[0.68rem] tracking-[0.06em] text-white/50 uppercase">
-                            {hero.panel.referenceLabel}
+                            {hero.panel.engagementLabel}
                           </p>
-                          <p className="mt-1.5 font-mono text-[0.9rem] text-white/90">{hero.panel.referenceValue}</p>
+                          <p className="mt-1.5 font-mono text-[0.9rem] text-white/90">{hero.panel.engagementValue}</p>
                         </div>
                         <span
                           className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-mint/15 bg-mint/[0.06] text-mint"
@@ -274,12 +274,12 @@ export default function Hero() {
                       <div className="flex items-start justify-between gap-3">
                         <div>
                           <p className="font-mono text-[0.68rem] tracking-[0.06em] text-white/50 uppercase">
-                            {hero.panel.routeLabel}
+                            {hero.panel.coverageLabel}
                           </p>
                           <p className="mt-1.5 font-mono text-[0.9rem] text-white/90">
-                            {hero.panel.route.originCode}
+                            {hero.panel.coverage.from}
                             <span className="mx-1 text-mint/70">→</span>
-                            {hero.panel.route.destinationCode}
+                            {hero.panel.coverage.to}
                           </p>
                         </div>
                         <span
