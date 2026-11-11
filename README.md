@@ -48,6 +48,7 @@ src/
   如 CI 无法访问 Docker Hub，可将 nginx 镜像同步到 ACR 并通过 `--build-arg NGINX_IMAGE=...` 覆盖。
 - GitLab CI：`.gitlab-ci.yml`，复用 `exio-frontend-ci` 共享模板；`main` 与 tag 构建并推送
   镜像到 `payfi-dev`，随后触发下游 Chart 仓库发布 dev。
+- CI/CD 流水线与产物说明见 [docs/cicd.md](docs/cicd.md)；
 - 详细变量、Chart 参数、首次接入与回滚步骤见 [docs/deployment.md](docs/deployment.md)。
 
 本地以容器方式验证：
@@ -56,7 +57,7 @@ src/
 pnpm build
 PORT=8080 node server.mjs
 # 或
-docker build --build-arg VITE_SITE_URL=https://paylume-dev.vtransfer.io -t exio-paylume-fe:local .
+docker build --build-arg VITE_SITE_URL=https://paylume.vtransfer.io -t exio-paylume-fe:local .
 docker run --rm -p 8080:8080 exio-paylume-fe:local
 ```
 
