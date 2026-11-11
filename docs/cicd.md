@@ -63,6 +63,21 @@ MR、`main`、tag 均执行 `frontend-validate`：安装锁定依赖、lint、ty
    并确认 ALB ACL。
 5. 确认 `VITE_SITE_URL` 为最终域名。
 
+## GitHub Pages（可选）
+
+除 GitLab + Helm 的主发布链路外，站点也可以发布到 GitHub Pages：
+
+- 远程：`github` → `git@github.com:nigel201611/paylume-fe.git`
+- 工作流：`.github/workflows/pages.yml`，push `main` 或手动触发
+- 地址：`https://nigel201611.github.io/paylume-fe/`
+- 构建变量：`VITE_BASE=/paylume-fe/`（项目页路径）、
+  `VITE_SITE_URL=https://nigel201611.github.io/paylume-fe`
+- 首次使用需在 GitHub 仓库 Settings → Pages 中把 Source 设为 **GitHub Actions**
+- 若绑定自定义域名，将 `VITE_BASE` 改为 `/`，并同步修改 `VITE_SITE_URL`
+- 站点只用锚点导航，无客户端路由，因此不需要 404 fallback；构建时写入 `.nojekyll`
+
+GitLab 流水线不受影响：未设置 `VITE_BASE` 时构建仍使用根路径 `/`。
+
 ## 验证记录
 
 - 本地：`pnpm typecheck`、`pnpm lint`、`pnpm build` 通过，`dist/` 788 KB。

@@ -23,6 +23,8 @@ export default defineConfig(() => {
   const siteUrl = (process.env.VITE_SITE_URL || '').replace(/\/+$/, '')
 
   return {
+    // GitHub project pages are served under /<repo>/; GitLab builds keep '/'.
+    base: process.env.VITE_BASE || '/',
     plugins: [react(), tailwindcss(), siteMeta(siteUrl)],
     build: {
       rolldownOptions: {
