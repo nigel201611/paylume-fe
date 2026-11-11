@@ -25,7 +25,7 @@ export default function UseCases() {
               key={useCase.title}
               className="group grid grid-cols-[56px_1fr] gap-5 rounded-2xl px-4 py-7 transition-colors duration-300 hover:bg-white/60"
             >
-              <span className="pt-1 font-mono text-[0.9rem] font-medium text-mint-deep">
+              <span className="pt-1 font-mono text-[1.1rem] font-medium text-mint-deep">
                 {String(index + 1).padStart(2, '0')}
               </span>
               <div>

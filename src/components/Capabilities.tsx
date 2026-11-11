@@ -53,7 +53,7 @@ export default function Capabilities() {
 
               <div className="relative z-10 flex flex-1 flex-col">
                 <div className="flex items-start justify-between gap-4">
-                  <span className="font-mono text-[0.9rem] font-medium tracking-[0.04em] text-mint">
+                  <span className="font-mono text-[1.1rem] font-medium tracking-[0.04em] text-mint">
                     {String(index + 1).padStart(2, '0')} / 04
                   </span>
                   <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-mint/15 bg-mint/[0.06] text-mint">

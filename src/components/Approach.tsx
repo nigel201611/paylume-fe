@@ -47,8 +47,8 @@ export default function Approach() {
               </span>
 
               <div className="relative z-10 flex h-full flex-col">
-                <span className="font-mono text-[0.88rem] tracking-[0.08em] text-mint-deep">
-                  <CountUp to={index + 1} prefix="0" duration={1} className="text-[0.88rem]" /> · {step.label}
+                <span className="font-mono text-[1.1rem] tracking-[0.08em] text-mint-deep">
+                  <CountUp to={index + 1} prefix="0" duration={1} className="text-[1.1rem]" /> · {step.label}
                 </span>
                 <h3 className="mt-5 mb-2 font-display text-[1.25rem] font-medium text-ink">{step.title}</h3>
                 <p className="text-[0.95rem] font-normal text-ink-soft">{step.copy}</p>
