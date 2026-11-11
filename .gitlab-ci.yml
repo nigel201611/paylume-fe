@@ -10,6 +10,8 @@ variables:
   BUILD_OUTPUT_DIR: "dist"
   # Public URL used for canonical / Open Graph tags at build time.
   VITE_SITE_URL: "https://paylume-dev.vtransfer.io"
+  # Static runtime image; override with an ACR mirror if Docker Hub is unreachable.
+  NGINX_IMAGE: "nginx:1.27-alpine"
   # GitLab accepts a URL-encoded project path; no numeric project ID required.
   # Create the chart repository before enabling deploy_dev (see docs/deployment.md).
   CHART_REPO_PROJECT_ID: "exiogroup%2Fexio-devops%2Fexio-paylume-fe-chart"
@@ -75,6 +77,7 @@ build_docker:
         --dockerfile "${CI_PROJECT_DIR}/Dockerfile" \
         ${IMAGE_DESTINATIONS} \
         --build-arg "VITE_SITE_URL=${VITE_SITE_URL}" \
+        --build-arg "NGINX_IMAGE=${NGINX_IMAGE}" \
         --digest-file "${CI_PROJECT_DIR}/image-digest.txt" \
         --cache=true \
         --cache-repo "${ACR_REGISTRY}/${ACR_NAMESPACE}/${IMAGE_NAME}/cache"

@@ -24,5 +24,19 @@ export default defineConfig(() => {
 
   return {
     plugins: [react(), tailwindcss(), siteMeta(siteUrl)],
+    build: {
+      rolldownOptions: {
+        output: {
+          codeSplitting: {
+            groups: [
+              { name: 'react', test: /node_modules\/(?:react|react-dom|scheduler)\// },
+              { name: 'gsap', test: /node_modules\/(?:gsap|@gsap)\// },
+              { name: 'motion', test: /node_modules\/motion\// },
+              { name: 'vendor', test: /node_modules\// },
+            ],
+          },
+        },
+      },
+    },
   }
 })

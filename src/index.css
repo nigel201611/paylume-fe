@@ -188,36 +188,28 @@
   }
 
   .btn-primary {
-    border-color: var(--color-mint);
-    background-color: var(--color-mint);
-    background-image: linear-gradient(
-      110deg,
-      transparent 0%,
-      transparent 34%,
-      rgba(255, 255, 255, 0.72) 47%,
-      rgba(255, 255, 255, 0.72) 53%,
-      transparent 66%,
-      transparent 100%
-    );
-    background-repeat: no-repeat;
-    background-size: 240% 100%;
-    color: var(--color-navy);
-    animation: btn-sheen 3.8s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+    border-color: transparent;
+    background-color: transparent;
+    background-image: linear-gradient(90deg, #36cdca 0%, #00dd95 100%);
+    color: #fff;
   }
 
-  @keyframes btn-sheen {
-    0% {
-      background-position: 135% 0;
-    }
-    52%,
-    100% {
-      background-position: -35% 0;
-    }
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: linear-gradient(110deg, transparent 40%, rgba(255, 255, 255, 0.3) 50%, transparent 60%);
+    background-repeat: no-repeat;
+    background-size: 240% 100%;
+    animation: cta-shine 4.2s ease-in-out infinite;
   }
 
   .btn-primary:hover {
-    border-color: #fff;
-    background-color: #fff;
+    border-color: rgba(255, 255, 255, 0.3);
+    filter: brightness(1.05);
   }
 
   .btn-secondary {

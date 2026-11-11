@@ -28,10 +28,14 @@ export default function Nav() {
   }, [])
 
   useEffect(() => {
-    const sections = SECTION_IDS.map((id) => ({ id, element: document.getElementById(id) })).filter(
-      (section): section is { id: (typeof SECTION_IDS)[number]; element: HTMLElement } =>
-        section.element !== null,
-    )
+    type SectionEntry = { id: (typeof SECTION_IDS)[number]; element: HTMLElement }
+    let sections: SectionEntry[] = []
+    const collectSections = () => {
+      sections = SECTION_IDS.map((id) => ({ id, element: document.getElementById(id) })).filter(
+        (section): section is SectionEntry => section.element !== null,
+      )
+    }
+    collectSections()
 
     let frame = 0
     const update = () => {
@@ -62,6 +66,14 @@ export default function Nav() {
       requestUpdate()
     }
 
+    // Sections mount lazily, so re-collect them as the DOM fills in.
+    const main = document.getElementById('main') ?? document.body
+    const domObserver = new MutationObserver(() => {
+      collectSections()
+      requestUpdate()
+    })
+    domObserver.observe(main, { childList: true, subtree: true })
+
     update()
     window.addEventListener('scroll', requestUpdate, { passive: true })
     window.addEventListener('resize', requestUpdate)
@@ -71,12 +83,48 @@ export default function Nav() {
 
     return () => {
       if (frame) cancelAnimationFrame(frame)
+      domObserver.disconnect()
       window.removeEventListener('scroll', requestUpdate)
       window.removeEventListener('resize', requestUpdate)
       window.removeEventListener('wheel', releaseLock)
       window.removeEventListener('touchstart', releaseLock)
       window.removeEventListener('keydown', releaseLock)
     }
+  }, [])
+
+  // Deep links may target a lazily mounted section; reveal it, then scroll.
+  useEffect(() => {
+    const hash = decodeURIComponent(window.location.hash.slice(1))
+    if (!hash || !(SECTION_IDS as readonly string[]).includes(hash)) return undefined
+
+    const reveal = () => window.dispatchEvent(new CustomEvent('paylume:reveal-section', { detail: hash }))
+    let attempts = 0
+
+    const isAligned = (element: HTMLElement) => {
+      const top = element.getBoundingClientRect().top
+      return top >= -20 && top <= 180
+    }
+
+    const retry = () => {
+      const element = document.getElementById(hash)
+      if (element) {
+        element.scrollIntoView({ block: 'start' })
+        // Lazy sections above may mount afterwards and shift the page.
+        if (!isAligned(element) && attempts < 8) {
+          attempts += 1
+          window.setTimeout(retry, 220)
+        }
+        return
+      }
+      if (attempts < 30) {
+        attempts += 1
+        window.setTimeout(retry, 120)
+      }
+    }
+
+    reveal()
+    const timer = window.setTimeout(retry, 200)
+    return () => window.clearTimeout(timer)
   }, [])
 
   // Keep one persistent underline and measure the active item instead of
@@ -143,7 +191,29 @@ export default function Nav() {
 
   const selectSection = (id: string) => {
     setActiveId(id)
-    scrollLockRef.current = performance.now() + 1100
+    scrollLockRef.current = performance.now() + 1800
+    window.dispatchEvent(new CustomEvent('paylume:reveal-section', { detail: id }))
+
+    let attempts = 0
+    const align = (behavior: ScrollBehavior) =>
+      document.getElementById(id)?.scrollIntoView({ behavior, block: 'start' })
+
+    // The target may still be lazy-loading; retry, then re-align once the
+    // sections above it have mounted and the page height settles.
+    const tryScroll = () => {
+      if (document.getElementById(id)) {
+        align('smooth')
+        window.setTimeout(() => align('auto'), 500)
+        window.setTimeout(() => align('auto'), 1100)
+        return
+      }
+      if (attempts < 30) {
+        attempts += 1
+        window.setTimeout(tryScroll, 120)
+      }
+    }
+
+    window.setTimeout(tryScroll, 120)
   }
 
   const spring = reduceMotion ? { duration: 0 } : { type: 'spring' as const, stiffness: 420, damping: 34, mass: 0.7 }

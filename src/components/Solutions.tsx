@@ -27,7 +27,7 @@ export default function Solutions() {
             >
               <div className="relative z-10 flex flex-1 flex-col">
                 <div className="flex items-start justify-between gap-4">
-                  <small className="min-w-0 font-mono text-[1.3rem] tracking-[0.08em] break-words text-mint-ink uppercase">
+                  <small className="min-w-0 font-mono text-[1.3rem] tracking-[0.08em] break-words text-ink-mute uppercase">
                     {solution.label}
                   </small>
                   <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-line/70 bg-white/70 text-mint-ink">

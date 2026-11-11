@@ -46,7 +46,7 @@ export default function LanguageSwitch({ className = '' }: { className?: string 
               <span className={`shrink-0 transition-opacity ${active ? 'opacity-100' : 'opacity-60'}`}>
                 <LanguageIcon locale={value} />
               </span>
-              <span className="hidden sm:inline">{label}</span>
+              <span>{label}</span>
             </span>
           </button>
         )
