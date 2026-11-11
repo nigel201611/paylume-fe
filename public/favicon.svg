@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="PAYLUME">
   <rect width="64" height="64" rx="12" fill="#0a0a0b"/>
-  <path d="M23 48V16h13.5C44.2 16 49 20.6 49 27.2c0 6.6-4.8 11.2-12.5 11.2H30V48h-7Zm7-15.6h6.1c3.4 0 5.4-1.9 5.4-5.2 0-3.3-2-5.2-5.4-5.2H30v10.4Z" fill="#7fe3c5"/>
-  <circle cx="46" cy="46" r="3.5" fill="#7fe3c5"/>
+  <path d="M23 48V16h13.5C44.2 16 49 20.6 49 27.2c0 6.6-4.8 11.2-12.5 11.2H30V48h-7Zm7-15.6h6.1c3.4 0 5.4-1.9 5.4-5.2 0-3.3-2-5.2-5.4-5.2H30v10.4Z" fill="#f4f4f5"/>
+  <circle cx="46" cy="46" r="3.5" fill="#a1a1aa"/>
 </svg>
