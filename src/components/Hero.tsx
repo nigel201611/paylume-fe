@@ -178,16 +178,16 @@ export default function Hero() {
                     {hero.panel.title}
                   </p>
 
-                  <div className="mt-5 rounded-2xl border border-white/14 bg-[linear-gradient(135deg,rgba(127,227,197,0.09),rgba(255,255,255,0.03))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] sm:p-5">
+                  <div className="mt-5 rounded-2xl border border-mint/20 bg-[linear-gradient(135deg,rgba(127,227,197,0.12),rgba(255,255,255,0.04))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_22px_44px_-34px_rgba(0,0,0,0.9)] sm:p-5">
                     <div className="flex items-start justify-between gap-4">
                       <div>
-                        <p className="font-mono text-[0.68rem] tracking-[0.06em] text-white/45 uppercase">
+                        <p className="font-mono text-[0.68rem] tracking-[0.06em] text-white/55 uppercase">
                           {hero.panel.amountLabel}
                         </p>
                         <p className="mt-1.5 font-display text-[1.55rem] leading-none font-medium tracking-[-0.03em] text-white sm:text-[1.9rem]">
                           {hero.panel.amountValue}
                         </p>
-                        <p className="mt-2 text-[0.78rem] text-white/50">{hero.panel.amountNote}</p>
+                        <p className="mt-2 text-[0.78rem] text-white/60">{hero.panel.amountNote}</p>
                       </div>
                       <span
                         className="hidden h-9 w-9 shrink-0 place-items-center rounded-full border border-mint/20 bg-mint/[0.08] text-[0.9rem] text-mint sm:grid"
@@ -197,31 +197,72 @@ export default function Hero() {
                       </span>
                     </div>
 
-                    <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-white/[0.09]">
+                    <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-white/[0.12]">
                       <span className="block h-full w-2/3 rounded-full bg-gradient-to-r from-mint-deep to-mint" />
                     </div>
-                    <div className="mt-2 flex items-center justify-between font-mono text-[0.74rem] tracking-[0.06em] text-white/45 uppercase">
+                    <div className="mt-2 flex items-center justify-between font-mono text-[0.74rem] tracking-[0.06em] text-white/55 uppercase">
                       <span>{hero.panel.progressLabel}</span>
                       <span>{hero.panel.progressValue}</span>
                     </div>
                   </div>
 
                   <div className="mt-3 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl border border-white/12 bg-white/[0.04] p-3.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
-                      <p className="font-mono text-[0.68rem] tracking-[0.06em] text-white/40 uppercase">
-                        {hero.panel.referenceLabel}
-                      </p>
-                      <p className="mt-1.5 font-mono text-[0.8rem] text-white/80">{hero.panel.referenceValue}</p>
+                    <div className="rounded-xl border border-white/16 bg-white/[0.055] p-3.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.07)]">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <p className="font-mono text-[0.68rem] tracking-[0.06em] text-white/50 uppercase">
+                            {hero.panel.referenceLabel}
+                          </p>
+                          <p className="mt-1.5 font-mono text-[0.9rem] text-white/90">{hero.panel.referenceValue}</p>
+                        </div>
+                        <span
+                          className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-mint/15 bg-mint/[0.06] text-mint"
+                          aria-hidden="true"
+                        >
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="h-4 w-4"
+                          >
+                            <path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18" />
+                          </svg>
+                        </span>
+                      </div>
                     </div>
-                    <div className="rounded-xl border border-white/12 bg-white/[0.04] p-3.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
-                      <p className="font-mono text-[0.68rem] tracking-[0.06em] text-white/40 uppercase">
-                        {hero.panel.routeLabel}
-                      </p>
-                      <p className="mt-1.5 font-mono text-[0.8rem] text-white/80">
-                        {hero.panel.route.originCode}
-                        <span className="mx-1 text-mint/70">→</span>
-                        {hero.panel.route.destinationCode}
-                      </p>
+                    <div className="rounded-xl border border-white/16 bg-white/[0.055] p-3.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.07)]">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <p className="font-mono text-[0.68rem] tracking-[0.06em] text-white/50 uppercase">
+                            {hero.panel.routeLabel}
+                          </p>
+                          <p className="mt-1.5 font-mono text-[0.9rem] text-white/90">
+                            {hero.panel.route.originCode}
+                            <span className="mx-1 text-mint/70">→</span>
+                            {hero.panel.route.destinationCode}
+                          </p>
+                        </div>
+                        <span
+                          className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-mint/15 bg-mint/[0.06] text-mint"
+                          aria-hidden="true"
+                        >
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="h-4 w-4"
+                          >
+                            <circle cx="12" cy="12" r="9" />
+                            <path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" />
+                          </svg>
+                        </span>
+                      </div>
                     </div>
                   </div>
 

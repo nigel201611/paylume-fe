@@ -1,16 +1,7 @@
-import type { CSSProperties } from 'react'
 import { useI18n } from '../i18n/locale-provider'
 import FadeContent from './reactbits/FadeContent/FadeContent'
-import SpotlightCard from './reactbits/SpotlightCard/SpotlightCard'
 import { SolutionIcon } from './icons'
 import SectionHeading from './SectionHeading'
-
-const cardStyle = {
-  borderRadius: 18,
-  '--spotlight-card-surface': '#fffdf8',
-  '--spotlight-card-border': 'transparent',
-  '--spotlight-card-shadow': '0 2px 3px rgba(15, 29, 24, 0.03), 0 30px 60px -38px rgba(16, 36, 44, 0.3)',
-} as CSSProperties
 
 export default function Solutions() {
   const { t } = useI18n()
@@ -25,19 +16,9 @@ export default function Solutions() {
 
         <FadeContent className="mt-14 grid gap-5 md:grid-cols-3 lg:gap-6" stagger={120} duration={1000} threshold={0.1}>
           {solutions.items.map((solution, index) => (
-            <SpotlightCard
+            <div
               key={solution.title}
-              theme="light"
-              spotlightColor="#1f9d80"
-              intensity={0.4}
-              spotlightSize={320}
-              softness={0.9}
-              borderGlow={0.55}
-              proximity={90}
-              grain={0.08}
-              flare={false}
-              className="flex min-h-[360px] flex-col overflow-hidden border border-line p-9 transition-transform duration-500 hover:-translate-y-1 [background-image:radial-gradient(circle_at_100%_0%,rgba(31,157,128,0.06),transparent_55%)]"
-              style={cardStyle}
+              className="relative isolate flex min-h-[360px] flex-col overflow-hidden rounded-[18px] border border-line bg-[#fffdf8] p-9 shadow-[0_2px_3px_rgba(15,29,24,0.03),0_30px_60px_-38px_rgba(16,36,44,0.3)] transition-transform duration-500 hover:-translate-y-1 [background-image:radial-gradient(circle_at_100%_0%,rgba(31,157,128,0.06),transparent_55%)]"
             >
               <span
                 aria-hidden="true"
@@ -69,7 +50,7 @@ export default function Solutions() {
                   ))}
                 </ul>
               </div>
-            </SpotlightCard>
+            </div>
           ))}
         </FadeContent>
       </div>

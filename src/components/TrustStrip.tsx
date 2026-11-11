@@ -14,17 +14,13 @@ export default function TrustStrip() {
         effect="fade"
         threshold={0.2}
       >
-        {trust.items.map((item, index) => (
-          <div
-            key={item.title}
-            className={`px-6 py-7 text-center ${
-              index < trust.items.length - 1 ? 'border-b border-white/6 md:border-r md:border-b-0' : ''
-            }`}
-          >
-            <strong className="block font-mono text-[0.7rem] font-medium tracking-[0.1em] text-mint uppercase">
+        {trust.items.map((item) => (
+          <div key={item.title} className="px-6 py-9 text-center md:py-10">
+            <strong className="inline-flex items-center gap-2 font-mono text-[0.85rem] font-medium tracking-[0.1em] text-mint uppercase">
+              <span className="h-1.5 w-1.5 rounded-full border border-mint/60" aria-hidden="true" />
               {item.title}
             </strong>
-            <span className="mt-1.5 block text-[0.85rem] text-white/55">{item.copy}</span>
+            <span className="mt-2 block text-[1rem] text-white/60">{item.copy}</span>
           </div>
         ))}
       </FadeContent>
