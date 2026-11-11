@@ -1,0 +1,151 @@
+include:
+  - project: "exiogroup/exio-devops/exio-frontend-ci"
+    ref: "311d90438d4038ff2eafeb8349a72fe0e960cfb0"
+    file: "/templates/frontend.yml"
+
+variables:
+  ACR_NAMESPACE: "payfi-dev"
+  IMAGE_NAME: "exio-paylume-fe"
+  PNPM_VERSION: "10.12.1"
+  BUILD_OUTPUT_DIR: "dist"
+  # Public URL used for canonical / Open Graph tags at build time.
+  VITE_SITE_URL: "https://paylume-dev.vtransfer.io"
+  # GitLab accepts a URL-encoded project path; no numeric project ID required.
+  # Create the chart repository before enabling deploy_dev (see docs/deployment.md).
+  CHART_REPO_PROJECT_ID: "exiogroup%2Fexio-devops%2Fexio-paylume-fe-chart"
+  CHART_REPO_REF: "main"
+  CHART_REPO_SERVICE_NAME: "exio-paylume-fe"
+  IMAGE_APPS: "exio-paylume-fe"
+  DEPLOY_APPS: "exio-paylume-fe"
+
+# Run on merge requests, main and tags.
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: "$CI_COMMIT_TAG"
+
+frontend-validate:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: "$CI_COMMIT_TAG"
+    - when: never
+  script:
+    - pnpm install --frozen-lockfile
+    - pnpm lint
+    - pnpm typecheck
+    - pnpm build
+  tags:
+    - build
+    - payfi
+
+# Build and push the image on main and tags.
+build_docker:
+  needs:
+    - job: frontend-validate
+      artifacts: false
+  tags:
+    - build
+    - payfi
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: "$CI_COMMIT_TAG"
+    - when: never
+  before_script:
+    - export IMAGE_TAG="${CI_COMMIT_TAG:-${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}}"
+    - |
+      IMAGE_DESTINATIONS=""
+      OLD_IFS="$IFS"
+      IFS=','
+      for APP in ${IMAGE_APPS}; do
+        IMAGE_DESTINATIONS="${IMAGE_DESTINATIONS} --destination ${ACR_REGISTRY}/${ACR_NAMESPACE}/${APP}:${IMAGE_TAG}"
+      done
+      IFS="$OLD_IFS"
+    - mkdir -p /kaniko/.docker
+    - |
+      cat > /kaniko/.docker/config.json <<EOF
+      {"auths":{"${ACR_REGISTRY}":{"username":"${ACR_USER}","password":"${ACR_PASSWORD}"}}}
+      EOF
+      trap ': > /kaniko/.docker/config.json' EXIT
+  script:
+    - |
+      /kaniko/executor \
+        --context "${CI_PROJECT_DIR}" \
+        --dockerfile "${CI_PROJECT_DIR}/Dockerfile" \
+        ${IMAGE_DESTINATIONS} \
+        --build-arg "VITE_SITE_URL=${VITE_SITE_URL}" \
+        --digest-file "${CI_PROJECT_DIR}/image-digest.txt" \
+        --cache=true \
+        --cache-repo "${ACR_REGISTRY}/${ACR_NAMESPACE}/${IMAGE_NAME}/cache"
+    - test -s image-digest.txt
+    - |
+      # Kaniko replaces the build container filesystem; use shell builtins here.
+      IMAGE_DIGEST=''
+      IFS= read -r IMAGE_DIGEST < image-digest.txt || test -n "$IMAGE_DIGEST"
+      case "$IMAGE_DIGEST" in sha256:*) ;; *) echo 'Missing image digest' >&2; exit 1;; esac
+      DIGEST_HEX="${IMAGE_DIGEST#sha256:}"
+      test "${#DIGEST_HEX}" -eq 64
+      case "$DIGEST_HEX" in *[!0-9a-f]*) echo 'Invalid image digest' >&2; exit 1;; esac
+      printf 'DEPLOY_IMAGE_REF=%s@%s\n' "$IMAGE_TAG" "$IMAGE_DIGEST" > image.env
+  artifacts:
+    expire_in: 7 days
+    reports:
+      dotenv: image.env
+    paths:
+      - image-digest.txt
+  after_script: []
+
+# Trigger the Helm chart repo to roll out the image to the dev environment.
+# Skipped automatically until CHART_REPO_TRIGGER_TOKEN is configured; the chart
+# repository and Argo application must exist first (docs/deployment.md).
+deploy_dev:
+  needs:
+    - job: build_docker
+      artifacts: true
+  environment:
+    name: dev
+    url: https://paylume-dev.vtransfer.io
+  resource_group: paylume-dev
+  tags:
+    - build
+    - payfi
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main" && $CHART_REPO_TRIGGER_TOKEN'
+    - if: '$CI_COMMIT_TAG && $CHART_REPO_TRIGGER_TOKEN'
+    - when: never
+  before_script:
+    - export IMAGE_TAG="${DEPLOY_IMAGE_REF:?build_docker must provide the image digest}"
+    - |
+      SERVICES=''
+      OLD_IFS="$IFS"
+      IFS=','
+      for APP in ${DEPLOY_APPS}; do
+        if [ -z "$SERVICES" ]; then
+          SERVICES="${APP},${IMAGE_TAG}"
+        else
+          SERVICES="${SERVICES};${APP},${IMAGE_TAG}"
+        fi
+      done
+      IFS="$OLD_IFS"
+  script:
+    - |
+      curl --fail-with-body --silent --show-error \
+        --request POST \
+        --form-string "token=${CHART_REPO_TRIGGER_TOKEN}" \
+        --form-string "ref=${CHART_REPO_REF}" \
+        --form-string "variables[SERVICES]=${SERVICES}" \
+        "${CI_API_V4_URL}/projects/${CHART_REPO_PROJECT_ID}/trigger/pipeline" \
+        --output downstream-pipeline.json
+    - |
+      DOWNSTREAM_ID="$(awk 'match($0, /"id":[0-9]+/) { value=substr($0, RSTART, RLENGTH); sub(/^"id":/, "", value); print value; exit }' downstream-pipeline.json)"
+      test -n "${DOWNSTREAM_ID}"
+
+# These inherited jobs target PayFi environments; only dev is defined here.
+deploy_uat:
+  rules:
+    - when: never
+
+deploy_prod:
+  rules:
+    - when: never
