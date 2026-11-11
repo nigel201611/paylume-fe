@@ -139,19 +139,19 @@ const en = {
     title: 'Designed around everyday business payment needs.' as string | string[],
     items: [
       {
-        label: '01 · Pay',
+        label: 'Pay',
         title: 'Business Payment Workflows',
         copy: 'Practical payment workflows designed to help eligible businesses manage routine transaction activity with greater clarity.',
         list: ['Structured payment requests', 'Review and approval steps', 'Transaction status visibility'],
       },
       {
-        label: '02 · Coordinate',
+        label: 'Coordinate',
         title: 'Cross-Border Operations',
         copy: 'Operational support for eligible international business payment needs, considered in line with applicable requirements.',
         list: ['International payment coordination', 'Business-purpose review', 'Operational support'],
       },
       {
-        label: '03 · Understand',
+        label: 'Understand',
         title: 'Reporting & Reconciliation',
         copy: 'Structured transaction information intended to support internal visibility, payment review and reconciliation processes.',
         list: ['Transaction records', 'Status and activity review', 'Reconciliation support'],
@@ -339,19 +339,19 @@ const zh: Messages = {
     title: ['围绕日常商业支付', '需求而设计。'],
     items: [
       {
-        label: '01 · 支付',
+        label: '支付',
         title: '企业支付流程',
         copy: '面向符合条件的企业的务实支付流程，帮助其更清晰地管理日常交易活动。',
         list: ['结构化的支付请求', '审核与审批步骤', '交易状态可见性'],
       },
       {
-        label: '02 · 协同',
+        label: '协同',
         title: '跨境运营',
         copy: '为符合条件的国际企业支付需求提供运营支持，并遵循相关要求。',
         list: ['国际支付协同', '商业用途审核', '运营支持'],
       },
       {
-        label: '03 · 洞察',
+        label: '洞察',
         title: '报表与对账',
         copy: '结构化的交易信息，支持内部可见性、支付审核与对账流程。',
         list: ['交易记录', '状态与活动查阅', '对账支持'],

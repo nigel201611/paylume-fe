@@ -20,7 +20,7 @@ export default function Contact() {
           <p className="mt-6 max-w-[580px] text-[1rem] font-normal text-white/60">{contact.copy}</p>
           <a
             href="mailto:bd@vtransfer.io"
-            className="mt-8 inline-flex items-center gap-3 font-mono text-[0.78rem] tracking-[0.08em] text-mint no-underline underline-offset-4 hover:underline"
+            className="mt-8 inline-flex items-center gap-3 font-mono text-[0.9rem] tracking-[0.08em] text-mint no-underline underline-offset-4 hover:underline"
           >
             <span className="h-px w-8 bg-mint/50" aria-hidden="true" />
             bd@vtransfer.io
@@ -48,10 +48,10 @@ export default function Contact() {
             {contact.rows.map((row) => (
               <div
                 key={row.key}
-                className="grid gap-1 rounded-xl px-4 py-4 transition-colors hover:bg-white/[0.03] sm:grid-cols-[130px_1fr] sm:items-baseline sm:gap-6"
+                className="grid gap-1 rounded-xl px-4 py-4 transition-colors hover:bg-white/[0.03] sm:grid-cols-[160px_1fr] sm:items-baseline sm:gap-6"
               >
-                <span className="font-mono text-[0.72rem] tracking-[0.08em] text-mint uppercase">{row.key}</span>
-                <span className="text-[0.92rem] text-white/75">
+                <span className="font-mono text-[0.85rem] tracking-[0.08em] text-mint uppercase">{row.key}</span>
+                <span className="text-[1.05rem] text-white/75">
                   {row.href ? (
                     <a
                       href={row.href}

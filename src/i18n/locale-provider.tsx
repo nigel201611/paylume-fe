@@ -1,13 +1,13 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
 import { messages, type Locale, type Messages } from './messages'
 
-const STORAGE_KEY = 'paylume-locale'
+const STORAGE_KEY = 'paylume-locale-v2'
 
 function readLocale(): Locale {
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY)
     if (stored === 'en' || stored === 'zh') return stored
-    return window.navigator.language?.toLowerCase().startsWith('zh') ? 'zh' : 'en'
+    return 'en'
   } catch {
     return 'en'
   }

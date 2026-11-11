@@ -10,9 +10,9 @@ import SplitText from './reactbits/SplitText/SplitText'
 
 const panelStyle = {
   borderRadius: 20,
-  '--spotlight-card-surface': 'rgba(9, 26, 21, 0.94)',
-  '--spotlight-card-border': 'rgba(255, 255, 255, 0.10)',
-  '--spotlight-card-shadow': '0 40px 90px -30px rgba(0, 0, 0, 0.7)',
+  '--spotlight-card-surface': 'rgba(9, 26, 21, 0.96)',
+  '--spotlight-card-border': 'transparent',
+  '--spotlight-card-shadow': '0 2px 4px rgba(0, 0, 0, 0.35), 0 48px 100px -32px rgba(0, 0, 0, 0.85)',
 } as CSSProperties
 
 export default function Hero() {
@@ -46,7 +46,7 @@ export default function Hero() {
       </div>
       <div className="hero-orbit" aria-hidden="true" />
       <div
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_55%_at_18%_100%,rgba(31,157,128,0.14),transparent_70%)]"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_55%_at_18%_100%,rgba(31,157,128,0.16),transparent_70%),radial-gradient(ellipse_52%_46%_at_84%_6%,rgba(31,157,128,0.10),transparent_65%),radial-gradient(ellipse_130%_120%_at_50%_42%,transparent_38%,rgba(2,8,7,0.55))]"
         aria-hidden="true"
       />
       <Noise
@@ -122,7 +122,7 @@ export default function Hero() {
 
         <div className="relative w-full max-w-[640px] lg:justify-self-end">
           <div
-            className="pointer-events-none absolute inset-x-8 top-12 h-3/4 rounded-full bg-mint/12 blur-3xl"
+            className="pointer-events-none absolute inset-x-8 top-12 h-3/4 rounded-full bg-mint/[0.16] blur-3xl"
             aria-hidden="true"
           />
           <div className="relative lg:rotate-[1.5deg] lg:transition-transform lg:duration-500 lg:hover:rotate-0">
@@ -147,11 +147,15 @@ export default function Hero() {
                 grain={0.14}
                 flare={false}
                 ambient
-                className="p-0!"
+                className="border border-white/12 p-0!"
                 style={panelStyle}
               >
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-x-6 top-0 z-[1] h-px bg-gradient-to-r from-transparent via-mint/40 to-transparent"
+                />
                 <div
-                  className="flex items-center justify-between border-b border-white/8 px-5 py-4 font-mono text-[0.7rem] tracking-[0.06em] text-white/55 uppercase"
+                  className="flex items-center justify-between border-b border-white/10 px-5 py-4 font-mono text-[0.7rem] tracking-[0.06em] text-white/55 uppercase"
                   aria-hidden="true"
                 >
                   <span>{hero.panel.label}</span>
@@ -174,7 +178,7 @@ export default function Hero() {
                     {hero.panel.title}
                   </p>
 
-                  <div className="mt-5 rounded-2xl border border-white/8 bg-[linear-gradient(135deg,rgba(127,227,197,0.06),rgba(255,255,255,0.02))] p-4 sm:p-5">
+                  <div className="mt-5 rounded-2xl border border-white/14 bg-[linear-gradient(135deg,rgba(127,227,197,0.09),rgba(255,255,255,0.03))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] sm:p-5">
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <p className="font-mono text-[0.68rem] tracking-[0.06em] text-white/45 uppercase">
@@ -193,7 +197,7 @@ export default function Hero() {
                       </span>
                     </div>
 
-                    <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
+                    <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-white/[0.09]">
                       <span className="block h-full w-2/3 rounded-full bg-gradient-to-r from-mint-deep to-mint" />
                     </div>
                     <div className="mt-2 flex items-center justify-between font-mono text-[0.74rem] tracking-[0.06em] text-white/45 uppercase">
@@ -203,13 +207,13 @@ export default function Hero() {
                   </div>
 
                   <div className="mt-3 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl border border-white/6 bg-white/[0.025] p-3.5">
+                    <div className="rounded-xl border border-white/12 bg-white/[0.04] p-3.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
                       <p className="font-mono text-[0.68rem] tracking-[0.06em] text-white/40 uppercase">
                         {hero.panel.referenceLabel}
                       </p>
                       <p className="mt-1.5 font-mono text-[0.8rem] text-white/80">{hero.panel.referenceValue}</p>
                     </div>
-                    <div className="rounded-xl border border-white/6 bg-white/[0.025] p-3.5">
+                    <div className="rounded-xl border border-white/12 bg-white/[0.04] p-3.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
                       <p className="font-mono text-[0.68rem] tracking-[0.06em] text-white/40 uppercase">
                         {hero.panel.routeLabel}
                       </p>

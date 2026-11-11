@@ -8,8 +8,8 @@ import SectionHeading from './SectionHeading'
 const cardStyle = {
   borderRadius: 18,
   '--spotlight-card-surface': '#fffdf8',
-  '--spotlight-card-border': 'rgba(15, 29, 24, 0.08)',
-  '--spotlight-card-shadow': '0 2px 4px rgba(15, 29, 24, 0.02), 0 28px 60px -40px rgba(16, 36, 44, 0.24)',
+  '--spotlight-card-border': 'transparent',
+  '--spotlight-card-shadow': '0 2px 3px rgba(15, 29, 24, 0.03), 0 30px 60px -38px rgba(16, 36, 44, 0.3)',
 } as CSSProperties
 
 export default function Solutions() {
@@ -36,19 +36,23 @@ export default function Solutions() {
               proximity={90}
               grain={0.08}
               flare={false}
-              className="flex min-h-[360px] flex-col overflow-hidden p-9 transition-transform duration-500 hover:-translate-y-1 [background-image:radial-gradient(circle_at_100%_0%,rgba(31,157,128,0.06),transparent_55%)]"
+              className="flex min-h-[360px] flex-col overflow-hidden border border-line p-9 transition-transform duration-500 hover:-translate-y-1 [background-image:radial-gradient(circle_at_100%_0%,rgba(31,157,128,0.06),transparent_55%)]"
               style={cardStyle}
             >
               <span
                 aria-hidden="true"
-                className="pointer-events-none absolute -right-2 -bottom-8 z-0 font-display text-[7rem] leading-none font-semibold tracking-[-0.06em] text-ink/[0.04]"
+                className="pointer-events-none absolute inset-x-8 top-0 z-0 h-px bg-gradient-to-r from-transparent via-mint-deep/35 to-transparent"
+              />
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute -right-2 -bottom-8 z-0 font-display text-[7rem] leading-none font-semibold tracking-[-0.06em] text-ink/[0.06]"
               >
                 {String(index + 1).padStart(2, '0')}
               </span>
 
               <div className="relative z-10 flex flex-1 flex-col">
                 <div className="flex items-start justify-between gap-4">
-                  <small className="font-mono text-[1.1rem] tracking-[0.08em] text-mint-deep uppercase">
+                  <small className="font-mono text-[1.3rem] tracking-[0.08em] text-mint-deep uppercase">
                     {solution.label}
                   </small>
                   <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-line/70 bg-white/70 text-mint-deep">
@@ -57,7 +61,7 @@ export default function Solutions() {
                 </div>
 
                 <h3 className="mt-8 mb-3 font-display text-[1.4rem] font-medium text-ink">{solution.title}</h3>
-                <p className="text-[0.95rem] font-normal text-ink-soft">{solution.copy}</p>
+                <p className="text-[1rem] font-normal text-ink-soft">{solution.copy}</p>
 
                 <ul className="solution-list mt-auto">
                   {solution.list.map((item) => (
